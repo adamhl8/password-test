@@ -1,10 +1,9 @@
 import bcrypt, { hash } from "bcrypt"
 import prompts from "prompts"
-import fse from "fs-extra"
-const fsep = fse.promises
+import fs, { promises as fsp } from "fs"
 
 const pwRegExp = /^(?=.*[a-zA-Z])(?=.*\s.*\s.*\s)(?=.*[4-9])(?!.*[$^&*()[\]]).{10,}$/gm
-const passwordExists = fse.existsSync("password")
+const passwordExists = fs.existsSync("password")
 
 if (passwordExists) {
   console.log("Password file found. Please enter the password.")
@@ -50,13 +49,13 @@ The following symbols are not allowed: $, ^, &, *, (, ), [, ]
 async function passwordSave(password: string) {
   const hash = await bcrypt.hash(password, 10)
 
-  fsep.writeFile("password", hash)
+  fsp.writeFile("password", hash)
 
   console.log("Password saved.")
 }
 
 async function passwordCheck(password: string): Promise<boolean> {
-  const data = await fsep.readFile("password", "utf8")
+  const data = await fsp.readFile("password", "utf8")
 
   return await bcrypt.compare(password, data)
 }
