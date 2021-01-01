@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcrypt"
+import bcrypt from "bcrypt"
 import prompts from "prompts"
 import fs, { promises as fsp } from "fs"
 
@@ -49,7 +49,7 @@ The following symbols are not allowed: $, ^, &, *, (, ), [, ]
 async function passwordSave(password: string) {
   const hash = await bcrypt.hash(password, 10)
 
-  fsp.writeFile("password", hash)
+  await fsp.writeFile("password", hash)
 
   console.log("Password saved.")
 }
