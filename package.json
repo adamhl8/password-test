@@ -1,8 +1,8 @@
 {
   "name": "password-test",
   "version": "0.1.0",
-  "repository": "https://github.com/Genshii8/password-test",
-  "author": "Genshii8",
+  "repository": "https://github.com/adamhl8/password-test",
+  "author": "adamhl8",
   "license": "MIT",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/node": "^15.3.0",
-    "@types/prompts": "^2.0.11",
-    "typescript": "^4.2.4",
-    "xo": "^0.40.1",
+    "@types/node": "^15.12.2",
+    "@types/prompts": "^2.0.13",
+    "typescript": "^4.3.2",
+    "xo": "^0.40.2",
     "yarn-upgrade-all": "^0.5.4"
   },
   "xo": {
