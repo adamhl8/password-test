@@ -7,7 +7,7 @@ Just a quick project to test out saving/validating a hashed password.
 1. Clone the repo.
 
 ```
-git clone https://github.com/Genshii8/password-test.git
+git clone https://github.com/adamhl8/password-test.git
 ```
 
 2. Install dependencies.
