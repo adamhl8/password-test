@@ -6,13 +6,14 @@ import prompts from 'prompts'
 const pwRequirements = `
 Password Requirements:
 
-At least 10 characters.
-At least 3 whitespace characters.
-At least one digit between 4 and 9.
-The following symbols are not allowed: $, ^, &, *, (, ), [, ]
+At least 8 characters.
+At least 1 uppercase character.
+At least 1 lowercase character.
+At least one digit.
+At least one special character.
 `
 
-const pwRegExp = /^(?=.*[A-Za-z])(?=(?:.*\s){3})(?=.*[4-9])(?!.*[$&()*[\]^]).{10,}$/gm
+const pwRegExp = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\d\sA-Za-z])(\S){8,}$/gm
 const passwordExists = fs.existsSync('password')
 
 if (fs.existsSync('password')) {
