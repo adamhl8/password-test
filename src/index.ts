@@ -1,5 +1,6 @@
-import fs, {promises as fsp} from 'fs'
 import bcrypt from 'bcrypt'
+// eslint-disable-next-line unicorn/prefer-node-protocol
+import fs, { promises as fsp } from 'fs'
 import prompts from 'prompts'
 
 const pwRequirements = `
@@ -11,54 +12,51 @@ At least one digit between 4 and 9.
 The following symbols are not allowed: $, ^, &, *, (, ), [, ]
 `
 
-const pwRegExp = /^(?=.*[a-zA-Z])(?=(?:.*\s){3})(?=.*[4-9])(?!.*[$^&*()[\]]).{10,}$/gm
+const pwRegExp = /^(?=.*[A-Za-z])(?=(?:.*\s){3})(?=.*[4-9])(?!.*[$&()*[\]^]).{10,}$/gm
 const passwordExists = fs.existsSync('password')
 
-if (passwordExists) {
-	console.log('Password file found. Please enter the password.')
+if (fs.existsSync('password')) {
+  console.log('Password file found. Please enter the password.')
 } else {
-	console.log('No password file found. Please create a new password.')
+  console.log('No password file found. Please create a new password.')
 }
 
 async function passwordPrompt() {
-	if (passwordExists) {
-		await prompts({
-			type: 'password',
-			name: 'value',
-			message: 'Enter password',
-			validate: async (value: string) =>
-				(await passwordCheck(value)) ? true : 'Incorrect password. Try again.'
-		})
+  if (passwordExists) {
+    await prompts({
+      type: 'password',
+      name: 'value',
+      message: 'Enter password',
+      validate: async (value: string) => ((await passwordCheck(value)) ? true : 'Incorrect password. Try again.'),
+    })
 
-		console.log('Password matches!')
-	} else {
-		console.log(pwRequirements)
+    console.log('Password matches!')
+  } else {
+    console.log(pwRequirements)
 
-		const response = await prompts({
-			type: 'password',
-			name: 'value',
-			message: 'Enter password',
-			validate: (value: string) =>
-				pwRegExp.test(value) ? true : 'Password does not satisfy requirements.'
-		})
+    const response = await prompts({
+      type: 'password',
+      name: 'value',
+      message: 'Enter password',
+      validate: (value: string) => (pwRegExp.test(value) ? true : 'Password does not satisfy requirements.'),
+    })
 
-		console.log('Saving password...')
-		await passwordSave(response.value as string)
-	}
+    console.log('Saving password...')
+    await passwordSave(response.value as string)
+  }
 }
 
 async function passwordSave(password: string) {
-	const hash = await bcrypt.hash(password, 10)
+  const hash = await bcrypt.hash(password, 10)
 
-	await fsp.writeFile('password', hash)
+  await fsp.writeFile('password', hash)
 
-	console.log('Password saved.')
+  console.log('Password saved.')
 }
 
 async function passwordCheck(password: string): Promise<boolean> {
-	const data = await fsp.readFile('password', 'utf8')
-	const passwordMatches = await bcrypt.compare(password, data)
-	return passwordMatches
+  const data = await fsp.readFile('password', 'utf8')
+  return await bcrypt.compare(password, data)
 }
 
-await passwordPrompt()
+void passwordPrompt()

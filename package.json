@@ -1,17 +1,16 @@
 {
   "name": "password-test",
   "version": "0.1.0",
-  "repository": "https://github.com/adamhl8/password-test",
-  "author": "adamhl8",
+  "description": "Just a quick project to test out saving/validating a hashed password.",
+  "repository": "github:adamhl8/password-test",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "start": "yarn build && node --enable-source-maps dist/index.js",
-    "build": "tsc",
-    "lint": "xo",
-    "fix": "xo --fix"
+    "lint": "eslint -f pretty --fix .",
+    "prettier": "prettier --write .",
+    "start": "tsc && node --enable-source-maps dist/index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -19,17 +18,22 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/node": "^15.12.2",
-    "@types/prompts": "^2.0.13",
-    "typescript": "^4.3.2",
-    "xo": "^0.40.2",
-    "yarn-upgrade-all": "^0.5.4"
-  },
-  "xo": {
-    "semicolon": false,
-    "prettier": true
-  },
-  "prettier": {
-    "printWidth": 100
+    "@types/eslint": "^7.28.0",
+    "@types/node": "^16.3.2",
+    "@types/prettier": "^2.3.2",
+    "@types/prompts": "^2.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-formatter-pretty": "^4.1.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-sonarjs": "^0.9.1",
+    "eslint-plugin-unicorn": "^34.0.1",
+    "prettier": "^2.3.2",
+    "prettier-plugin-organize-imports": "^2.2.0",
+    "prettier-plugin-pkg": "^0.10.0",
+    "prettier-plugin-sh": "^0.7.1",
+    "typescript": "^4.3.5"
   }
 }
