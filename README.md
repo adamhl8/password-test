@@ -13,13 +13,13 @@ git clone https://github.com/adamhl8/password-test.git
 2. Install dependencies.
 
 ```
-yarn install
+pnpm i
 ```
 
 3. Start the app.
 
 ```
-yarn start
+pnpm start
 ```
 
 ## Usage
