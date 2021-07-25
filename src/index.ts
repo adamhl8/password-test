@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt'
-// eslint-disable-next-line unicorn/prefer-node-protocol
-import fs, { promises as fsp } from 'fs'
+import fs, { promises as fsp } from 'node:fs'
 import prompts from 'prompts'
 
 const pwRequirements = `
@@ -16,7 +15,7 @@ At least one special character.
 const pwRegExp = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\d\sA-Za-z])(\S){8,}$/gm
 const passwordExists = fs.existsSync('password')
 
-if (fs.existsSync('password')) {
+if (passwordExists) {
   console.log('Password file found. Please enter the password.')
 } else {
   console.log('No password file found. Please create a new password.')
